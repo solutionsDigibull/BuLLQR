@@ -1,6 +1,6 @@
-# Environment files (contain secrets)
-.env
+# Environment files (local overrides with real secrets)
 backend/.env
+.env.local
 
 # Prompt/notes files with API keys
 CAT-pmt1.txt
