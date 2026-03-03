@@ -144,6 +144,14 @@ async def startup_event():
         print("✓ Database migrations applied")
     except Exception as e:
         print(f"⚠️  Migration warning: {e}")
+        # Fallback: ensure all tables exist via SQLAlchemy metadata
+        try:
+            from src.database import Base, engine
+            import src.models  # noqa: F401 — ensure all models are loaded
+            Base.metadata.create_all(bind=engine)
+            print("✓ Tables created via SQLAlchemy fallback")
+        except Exception as e2:
+            print(f"⚠️  Fallback table creation warning: {e2}")
 
     # Auto-seed default data (admin user, stages, rework costs)
     try:
