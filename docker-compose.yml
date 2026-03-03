@@ -19,6 +19,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     restart: unless-stopped
+    expose:
+      - "8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -43,6 +45,8 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     restart: unless-stopped
+    expose:
+      - "80"
     depends_on:
       backend:
         condition: service_healthy
